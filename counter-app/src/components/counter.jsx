@@ -7,14 +7,21 @@ class Counter extends Component {
     //     tags: ["tag1","tag2","tag3"]
     // };
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            count: 0,
-            imageUrl: 'https://picsum.photos/200',
-            tags: ["tag1","tag2","tag3"]
-        };
-    }
+    // constructor(props) {
+    //     super(props);
+    //     this.state = {
+    //         count: this.props.value,
+    //         imageUrl: 'https://picsum.photos/200',
+    //         tags: ["tag1","tag2","tag3"]
+    //     };
+    // }
+    state = {
+        value: this.props.value,
+        imageUrl: 'https://picsum.photos/200',
+        tags: ["tag1","tag2","tag3"]
+    };
+
+
 
     renderTags() {
 
@@ -25,19 +32,19 @@ class Counter extends Component {
 
     handleIncrement = product => {
         console.log(product);
-        this.setState({count: this.state.count + 1});
+        this.setState({value: this.state.value + 1});
     }
 
 
     getBadgeClasses() {
         let classes = "badge m-2 ";
-        classes += this.state.count === 0 ? "badge-warning" : "badge-primary";
+        classes += this.state.value === 0 ? "badge-warning" : "badge-primary";
         return classes;
     }
 
     formatCount () {
-        const {count} = this.state;
-        return count === 0 ? "Zero" : count;
+        const {value} = this.state;
+        return value === 0 ? "Zero" : value;
     }
 
 
@@ -49,9 +56,6 @@ class Counter extends Component {
                 <span className={this.getBadgeClasses()}>{this.formatCount()}</span>
                 {/*<h2>It is.</h2>*/}
                 <button onClick={(product) => this.handleIncrement(product)} className="btn btn-secondary btn-sm">Increment</button>
-                <input onChange={(product) => this.handleIncrement(product.target.value)}/>
-                {this.state.tags.length === 0 && "Please create a new tag!"}
-                {this.renderTags()}
             </div>
         );
     }
