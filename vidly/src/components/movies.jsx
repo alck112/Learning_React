@@ -1,11 +1,28 @@
 import React, {Component} from 'react';
-import LikeButton from "./likeButton";
+import {getMovies} from "../services/fakeMovieService";
+import LikeButton from "./common/likeButton";
 
 class Movies extends Component {
+    state = {
+        movies: getMovies()
+    };
+
+    handleDelete = movie => {
+        const movies = this.state.movies.filter(m => m._id !== movie._id);
+        this.setState({movies: movies});
+    };
+
+    handleLikedMovie = movie => {
+        const movies = [...this.state.movies];
+        const index = movies.indexOf(movie);
+        movies[index] = {...movie};
+        movies[index].isLiked = !movies[index].isLiked
+        this.setState({movies: movies});
+    }
 
 
     render() {
-        const {length: count} = this.props.movies;
+        const {length: count} = this.state.movies;
         if (count === 0)
             return <p>There are no movies in the database.</p>;
 
@@ -24,15 +41,15 @@ class Movies extends Component {
                     </tr>
                     </thead>
                     <tbody>
-                    {this.props.movies.map(movie => (
+                    {this.state.movies.map(movie => (
                         <tr key={movie._id}>
                             <td>{movie.title}</td>
                             <td>{movie.genre.name}</td>
                             <td>{movie.numberInStock}</td>
                             <td>{movie.dailyRentalRate}</td>
-                            <td> <LikeButton onLikeClick={() => this.props.onLikeClick(movie)} movie={movie} /> </td>
+                            <td><LikeButton onLikeClick={() => this.handleLikedMovie(movie)} movie={movie}/></td>
                             <td>
-                                <button onClick={() => this.props.onDelete(movie)} className="btn btn-danger btn-sm"
+                                <button onClick={() => this.handleDelete(movie)} className="btn btn-danger btn-sm"
                                         type="button">Delete
                                 </button>
                             </td>
