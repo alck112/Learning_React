@@ -1,7 +1,6 @@
-import React from 'react';
+import React from "react";
 
 const LikeButton = (props) => {
-
     // const getHeartClasses = () => {
     //     let classes = "";
     //     classes = props.movie.isLiked ? "fa fa-heart" : "fa fa-heart-o";
@@ -15,9 +14,12 @@ const LikeButton = (props) => {
 
     return (
         <div>
-            <i onClick={props.onLikeClick} className={classes} style={{cursor: "pointer"}}></i>
+            <i onClick={props.onLikeClick}
+                className={classes}
+                style={{cursor: "pointer"}}
+            ></i>
         </div>
     );
-}
+};
 
 export default LikeButton;
