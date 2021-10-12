@@ -6,6 +6,8 @@ import ListGroup from "./common/listGroup";
 import  {getGenres} from "../services/fakeGenreService";
 import MoviesTable from "./moviesTable";
 import _ from "lodash";
+import {Link} from 'react-router-dom'
+
 import * as path from "path";
 
 class Movies extends Component {
@@ -91,6 +93,12 @@ class Movies extends Component {
                     />
                 </div>
                 <div className="col">
+                    <Link to={"/movies/new"}
+                          className="btn btn-primary"
+                          style={{marginBottom: 20}}
+                    >
+                        New Movie
+                    </Link>
                     <p> Showing {totoalCount} movies in the database.</p>
                     <MoviesTable movies={movies}
                                  onLikeClick={this.handleLikedMovie}
