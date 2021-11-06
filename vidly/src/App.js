@@ -1,46 +1,44 @@
-import React, {Component} from 'react';
-import {BrowserRouter as Router,
-    Switch,
-    Route,
-    Link,
-    Redirect} from "react-router-dom";
+import React, {Component} from "react";
+import {Redirect, Route, Switch} from "react-router-dom";
 import Movies from "./components/movies";
-import NavBar from "./components/common/navbar";
-import Customers from './components/common/customers'
-import Rentals from "./components/common/rentals";
-import NotFound from "./components/common/notFound";
-import MovieForm from "./components/common/movieForm";
-import LoginForm from "./components/common/loginForm";
-import RegisterForm from "./components/common/RegisterForm";
-import './App.css';
+import MovieForm from "./components/movieForm";
+import Customers from "./components/customers";
+import Rentals from "./components/rentals";
+import NotFound from "./components/notFound";
+import NavBar from "./components/navBar";
+import LoginForm from "./components/loginForm";
+import RegisterForm from "./components/registerForm";
+import {ToastContainer} from "react-toastify"
+import "react-toastify/dist/ReactToastify.css";
+import "./App.css";
 
+import * as Sentry from "@sentry/react";
 
 
 class App extends Component {
-
     render() {
         return (
             <React.Fragment>
-                <NavBar />
+                <ToastContainer/>
+                <NavBar/>
                 <main className="container">
-                    <div>
-                        <Switch>
-                            <Route path="/movies/:id" component={MovieForm} />
-                            <Route path="/movies/new" component={MovieForm} />
-                            <Route path="/movies" component={Movies} />
-                            <Route path="/customers" component={Customers} />
-                            <Route path="/rentals" component={Rentals} />
-                            <Route path="/login" component={LoginForm} />
-                            <Route path="/register" component={RegisterForm} />
-                            <Route path="/not-found" component={NotFound} />
-                            <Redirect from="/" to="/movies" exact />
-                            <Redirect to="/not-found" />
-                        </Switch>
-                    </div>
+                    <Switch>
+                        <Route path="/register" component={RegisterForm}/>
+                        <Route path="/login" component={LoginForm}/>
+                        <Route path="/movies/:id" component={MovieForm}/>
+                        <Route path="/movies" component={Movies}/>
+                        <Route path="/customers" component={Customers}/>
+                        <Route path="/rentals" component={Rentals}/>
+                        <Route path="/not-found" component={NotFound}/>
+                        <Redirect from="/" exact to="/movies"/>
+                        <Redirect to="/not-found"/>
+                    </Switch>
                 </main>
             </React.Fragment>
         );
     }
 }
 
-export default App;
+// export default App;
+
+export default Sentry.withProfiler(App);

@@ -3,7 +3,11 @@ import { toast } from 'react-toastify';
 import logger from "../services/logSerivce"
 
 
-axios.interceptors.response.use(null, error => {
+axios.interceptors.response.use(response => {
+    console.log("response interceptor success!!");
+    console.log(response);
+    return response;
+}, error => {
     const expectedError =
         error.response &&
         error.response.status >= 400 &&
