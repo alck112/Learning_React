@@ -37,12 +37,11 @@ class Movies extends Component {
 
         try {
             await deleteMovie(movie._id);
-        }
-        catch (ex) {
-          if (ex.response && ex.response.status === 404)
-              toast.error("This movie has already been deleted.");
+        } catch (ex) {
+            if (ex.response && ex.response.status === 404)
+                toast.error("This movie has already been deleted.");
 
-          this.setState({movies: originalMovies});
+            this.setState({movies: originalMovies});
         }
     };
 
