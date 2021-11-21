@@ -116,3 +116,4 @@ class App extends Component {
 }
 
 export default Sentry.withProfiler(App);
+// export default App;
