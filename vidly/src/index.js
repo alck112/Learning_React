@@ -10,6 +10,8 @@ import "font-awesome/css/font-awesome.css";
 
 // logger.init();
 
+console.log("SUPERMAN",process.env.REACT_APP_NAME);
+
 ReactDOM.render(
   <BrowserRouter>
     <App />
